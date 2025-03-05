@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:security_app/constant.dart';
+import 'package:security_app/core/utils/app_router.dart';
 
 class Homeview extends StatelessWidget {
   const Homeview({super.key});
@@ -52,7 +54,7 @@ class Homeview extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                 ),
                 onPressed: () {
-                  // هنا هنضيف الانتقال لصفحة المراقبة لاحقًا
+                  GoRouter.of(context).push(AppRouter.kMonitorView);
                 },
                 child: const Text("Start Monitoring",
                     style: TextStyle(fontSize: 18, color: kPrimaryColor)),
