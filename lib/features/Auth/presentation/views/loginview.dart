@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -37,7 +36,7 @@ class Loginview extends StatelessWidget {
       child: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: Scaffold(
-          backgroundColor: primaryColor,
+          backgroundColor: kPrimaryColor,
           body: Form(
             key: formKey,
             child: Column(
@@ -45,7 +44,7 @@ class Loginview extends StatelessWidget {
               spacing: 20,
               children: [
                 Image.asset(
-                  AssetsData.logoPic,
+                  AssetsData.splashpic,
                   width: 200,
                   height: 200,
                 ),
@@ -76,7 +75,7 @@ class Loginview extends StatelessWidget {
                 ),
                 CustomButton(
                   buttonName: 'Login',
-                  onPressed: (){},
+                  onPressed: () {},
                   // onPressed: () async {
                   //   if (formKey.currentState!.validate()) {
                   //     BlocProvider.of<AuthCubit>(context).add(

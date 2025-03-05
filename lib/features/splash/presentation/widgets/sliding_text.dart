@@ -15,7 +15,7 @@ class SlidingText extends StatelessWidget {
       builder: (context, _) {
         return SlideTransition(
           position: slidingAnimation,
-          child: Text('Your Security, Our Priority', textAlign: TextAlign.center),
+          child: Text('Your Security, Our Priority', textAlign: TextAlign.center,style: TextStyle(fontSize: 25),),
         );
       },
     );

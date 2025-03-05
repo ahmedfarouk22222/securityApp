@@ -34,16 +34,16 @@ class _SplashViewBodyState extends State<SplashViewBody>
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset(AssetsData.splashpic, width: 100),
-          SlidingText(slidingAnimation: slidingAnimation),
+          Image.asset(AssetsData.splashpic, height: 250, width: 250,fit:  BoxFit.contain),
+          SlidingText(slidingAnimation: slidingAnimation,),
           const SizedBox(height: 20),
-          const Text(
-            "Your Security, Our Priority",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          // const Text(
+          //   "Your Security, Our Priority",
+          //   style: TextStyle(
+          //     fontSize: 18,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
         ],
       ),
     );

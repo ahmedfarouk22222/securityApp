@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -34,7 +33,7 @@ class Registerview extends StatelessWidget {
         return ModalProgressHUD(
           inAsyncCall: false,
           child: Scaffold(
-            backgroundColor: primaryColor,
+            backgroundColor: kPrimaryColor,
             body: Form(
               key: formKey,
               child: Column(
@@ -74,7 +73,7 @@ class Registerview extends StatelessWidget {
                   ),
                   CustomButton(
                     buttonName: 'Register',
-                    onPressed: (){},
+                    onPressed: () {},
                     // onPressed: () async {
                     //   if (formKey.currentState!.validate()) {
                     //     BlocProvider.of<AuthBloc>(context).add(

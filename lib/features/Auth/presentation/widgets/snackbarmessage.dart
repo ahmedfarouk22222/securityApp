@@ -7,7 +7,7 @@ void snackbarMessage(BuildContext context, String message) {
       backgroundColor: Colors.white,
       content: Text(
         message,
-        style: TextStyle(color: primaryColor),
+        style: TextStyle(color: kPrimaryColor),
       ),
     ),
   );
