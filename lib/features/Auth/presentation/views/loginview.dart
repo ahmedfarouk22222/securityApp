@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:security_app/constant.dart';
 import 'package:security_app/core/utils/app_router.dart';
-import 'package:security_app/core/utils/assets_data.dart';
 import 'package:security_app/features/Auth/busines_logic/auth_cubit/cubit/auth_cubit.dart';
 import 'package:security_app/features/Auth/presentation/widgets/custom_button.dart';
 import 'package:security_app/features/Auth/presentation/widgets/custom_textfield.dart';
@@ -43,13 +42,13 @@ class Loginview extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               spacing: 20,
               children: [
-                Image.asset(
-                  AssetsData.splashpic,
-                  width: 200,
-                  height: 200,
+                Icon(
+                  Icons.security,
+                  size: 100,
+                  color: Colors.white,
                 ),
                 Text(
-                  'Security App',
+                  'Vioguard',
                   style: TextStyle(fontSize: 35, color: Colors.white),
                 ),
                 Row(

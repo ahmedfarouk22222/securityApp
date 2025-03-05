@@ -1,11 +1,25 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:security_app/constant.dart';
+import 'package:security_app/core/utils/app_router.dart';
 import 'package:security_app/core/utils/assets_data.dart';
 
-class SplashViewBody extends StatelessWidget {
+class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
+
+  @override
+  State<SplashViewBody> createState() => _SplashViewBodyState();
+}
+
+class _SplashViewBodyState extends State<SplashViewBody> {
+  @override
+  void initState() {
+    
+    super.initState();
+    navigateToHome();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,5 +66,11 @@ class SplashViewBody extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void navigateToHome() {
+    Future.delayed(Duration(seconds: 3), () {
+      GoRouter.of(context).push(AppRouter.kloginView);
+    });
   }
 }

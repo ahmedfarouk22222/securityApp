@@ -41,15 +41,15 @@ class Registerview extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 20,
                 children: [
-                  Image.asset(
-                    AssetsData.splashpic,
-                    width: 200,
-                    height: 200,
-                  ),
-                  Text(
-                    'Scholar Chat',
-                    style: TextStyle(fontSize: 35, color: Colors.white),
-                  ),
+                 Icon(
+                  Icons.security,
+                  size: 100,
+                  color: Colors.white,
+                ),
+                Text(
+                  'Vioguard',
+                  style: TextStyle(fontSize: 35, color: Colors.white),
+                ),
                   Row(
                     children: [
                       Text(
