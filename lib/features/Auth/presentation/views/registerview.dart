@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:security_app/constant.dart';
+import 'package:security_app/core/utils/assets_data.dart';
 import 'package:security_app/features/Auth/busines_logic/auth_cubit/cubit/auth_cubit.dart';
 import 'package:security_app/features/Auth/presentation/widgets/custom_button.dart';
 import 'package:security_app/features/Auth/presentation/widgets/custom_textfield.dart';
@@ -41,7 +42,7 @@ class Registerview extends StatelessWidget {
                 spacing: 20,
                 children: [
                   Image.asset(
-                    'lib/assets/images/Male.png',
+                    AssetsData.splashpic,
                     width: 200,
                     height: 200,
                   ),
@@ -73,14 +74,12 @@ class Registerview extends StatelessWidget {
                   ),
                   CustomButton(
                     buttonName: 'Register',
-                    onPressed: () {},
-                    // onPressed: () async {
-                    //   if (formKey.currentState!.validate()) {
-                    //     BlocProvider.of<AuthBloc>(context).add(
-                    //       RegisterEvent(email: email!, password: password!),
-                    //     );
-                    //   }
-                    // },
+                    onPressed: () async {
+                      if (formKey.currentState!.validate()) {
+                        BlocProvider.of<AuthCubit>(context)
+                            .registerUser(email: email!, password: password!);
+                      }
+                    },
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

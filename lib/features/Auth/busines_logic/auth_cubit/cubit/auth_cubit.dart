@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
@@ -6,45 +8,49 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
-  Future<void> LoginUser(
-      {required String email, required String password}) async {
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<void> loginUser({required String email, required String password}) async {
+    emit(LoginLoading());
     try {
-      emit(LoginLoading());
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
       emit(LoginSuccess());
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        emit(LoginFailure(errorMessage: 'user-not-found'));
-      } else if (e.code == 'wrong-password') {
-        emit(LoginFailure(errorMessage: 'wrong-password'));
-      }
+      emit(LoginFailure(errorMessage: _getFirebaseErrorMessage(e.code)));
     } catch (e) {
-      emit(LoginFailure(errorMessage: 'errror'));
+      log('Unexpected error during login: $e');
+      emit(LoginFailure(errorMessage: 'An unexpected error occurred.'));
     }
   }
-   Future<void> registerUser(
-      {required String email, required String password}) async {
+
+  Future<void> registerUser({required String email, required String password}) async {
+    emit(RegisterLoading());
     try {
-      emit(RegisterLoading());
-      FirebaseAuth.instance;
-      UserCredential userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
+      await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      emit(RegisterSuccess());
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        emit(
-          RegisterFailure(errorMessage: 'weak-password'),
-        );
-      } else if (e.code == 'email-already-in-use') {
-        emit(
-          RegisterFailure(
-              errorMessage: 'The account already exists for that email.'),
-        );
-      }
-    } on Exception catch (e) {
-      emit(RegisterFailure(errorMessage: 'error'));
+      emit(RegisterFailure(errorMessage: _getFirebaseErrorMessage(e.code)));
+    } catch (e) {
+      log('Unexpected error during registration: $e');
+      emit(RegisterFailure(errorMessage: 'An unexpected error occurred.'));
+    }
+  }
+
+  String _getFirebaseErrorMessage(String errorCode) {
+    switch (errorCode) {
+      case 'invalid-email':
+        return 'Invalid email format.';
+      case 'user-not-found':
+        return 'No user found for this email.';
+      case 'wrong-password':
+        return 'Incorrect password.';
+      case 'email-already-in-use':
+        return 'Email is already in use.';
+      case 'weak-password':
+        return 'Password is too weak.';
+      default:
+        return 'Something went wrong. Please try again.';
     }
   }
 }

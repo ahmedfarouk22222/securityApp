@@ -60,10 +60,13 @@ class _SplashViewBodyState extends State<SplashViewBody>
       end: Offset.zero,
     ).animate(animationController);
 
-    animationController.forward().whenComplete(() => navigateToHome());
+   animationController.forward().then((_) async {
+  await Future.delayed(const Duration(seconds: 1));
+  navigateToHome();
+});
   }
 
   void navigateToHome() {
-    GoRouter.of(context).push(AppRouter.kloginView);
+    GoRouter.of(context).go(AppRouter.kloginView);
   }
 }

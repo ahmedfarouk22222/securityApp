@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:security_app/constant.dart';
+import 'package:security_app/core/utils/app_router.dart';
 import 'package:security_app/core/utils/assets_data.dart';
 import 'package:security_app/features/Auth/busines_logic/auth_cubit/cubit/auth_cubit.dart';
-import 'package:security_app/features/Auth/presentation/views/registerview.dart';
 import 'package:security_app/features/Auth/presentation/widgets/custom_button.dart';
 import 'package:security_app/features/Auth/presentation/widgets/custom_textfield.dart';
 import 'package:security_app/features/Auth/presentation/widgets/snackbarmessage.dart';
@@ -24,8 +25,7 @@ class Loginview extends StatelessWidget {
           showSpinner = true;
         } else if (state is LoginSuccess) {
           snackbarMessage(context, 'login success');
-          // Navigator.pushNamed(context, Chatview.id, arguments: email);
-          // BlocProvider.of<ChatCubit>(context).getMessage();
+          GoRouter.of(context).push(AppRouter.kHomeview);
 
           showSpinner = false;
         } else if (state is LoginFailure) {
@@ -75,14 +75,12 @@ class Loginview extends StatelessWidget {
                 ),
                 CustomButton(
                   buttonName: 'Login',
-                  onPressed: () {},
-                  // onPressed: () async {
-                  //   if (formKey.currentState!.validate()) {
-                  //     BlocProvider.of<AuthCubit>(context).add(
-                  //       LoginEvent(email: email!, password: password!),
-                  //     );
-                  //   }
-                  // },
+                  onPressed: () async {
+                    if (formKey.currentState!.validate()) {
+                      BlocProvider.of<AuthCubit>(context)
+                          .loginUser(email: email!, password: password!);
+                    }
+                  },
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -95,12 +93,7 @@ class Loginview extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Registerview(),
-                          ),
-                        );
+                        GoRouter.of(context).push(AppRouter.kRegisterview);
                       },
                       child: Text(
                         'Register',
